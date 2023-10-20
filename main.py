@@ -10,8 +10,8 @@ def check_battery():
     print(f"WARNING: Battery percentage at critical level (%{battery_percentage}). Do not fly far, and please charge after use")
   elif 10 < battery_percentage <= 50:
     print(f"WARNING: Battery percentage at concerning level (%{battery_percentage}). Do not fly far, and please charge after use")
-  else battery_percentage >= 50:
-    print(f"Good to go! Battery percentage at %{battery_percentage}"
+  elif battery_percentage >= 50:
+    print(f"Good to go! Battery percentage at %{battery_percentage}")
 
 def get_flight_time(percentage):
   return (percentage*0.01)*13
