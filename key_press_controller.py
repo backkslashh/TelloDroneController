@@ -1,6 +1,7 @@
 import key_press_module as kp
 from djitellopy import tello
 from time import sleep
+import threading
 import cv2
 
 kp.init()
@@ -36,14 +37,22 @@ def get_keyboard_input():
 
 vals2 = []
 
-while True:
-    img = drone.get_frame_read().frame
-    cv2.imshow("Image", img)
-    vals = get_keyboard_input()
-    if vals != vals2:
-        drone.send_rc_control(vals[0], vals[1], vals[2], vals[3])
-    sleep(0.05)
-    vals2 = vals
-# TODO Add threading to avoid camera freezing when doing takeoff, landing, and flips.
+def inputLoop():
+    while True:
+        vals = get_keyboard_input()
+        if vals != vals2:
+            drone.send_rc_control(vals[0], vals[1], vals [2], vals [3])
+        vals2 = vals
+        sleep(0.017)
+def videoStreamLoop():
+    while True:
+        img.drone.get_frame_read().frame
+        cv2.imshow("Image", img)
+        sleep(0.017)
 
+videoThread = threading.Thread(target = videoStreamLoop)
+inputThread = threading.Thread(target = inputLoop)
+
+videoThread.start()
+inputThread.start()
 
