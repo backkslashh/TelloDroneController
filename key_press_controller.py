@@ -35,9 +35,8 @@ def get_keyboard_input():
     return [lr, fb, ud, yv]
 
 
-vals2 = []
-
 def inputLoop():
+    vals2 = []
     while True:
         vals = get_keyboard_input()
         if vals != vals2:
